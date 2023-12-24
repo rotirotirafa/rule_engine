@@ -10,8 +10,11 @@ class RulesModel(Base):
 
     rule_id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
+    code = Column(Integer)
     condition = Column(String)
     action = Column(String)
+    message = Column(String)
+    description = Column(String)
     created_date = Column(DateTime, default=datetime.now())
 
     class Config:
