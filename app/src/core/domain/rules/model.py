@@ -13,6 +13,7 @@ class RulesModel(Base):
     code = Column(Integer)
     condition = Column(String)
     action = Column(String)
+    parameters = Column(String)
     message = Column(String)
     description = Column(String)
     created_date = Column(DateTime, default=datetime.now())
