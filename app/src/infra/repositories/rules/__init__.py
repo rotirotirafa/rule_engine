@@ -26,7 +26,11 @@ class RulesRepository:
         create_object = RulesModel(
             name=rule.name,
             condition=rule.condition,
-            action=rule.action
+            action=rule.action,
+            code=rule.code,
+            parameters=rule.parameters,
+            message=rule.message,
+            description=rule.description
         )
         self.db.add(create_object)
         self.db.commit()
@@ -40,6 +44,10 @@ class RulesRepository:
                 "name": rule.name or old_object['name'],
                 "condition": rule.condition or old_object['condition'],
                 "action": rule.action or old_object['action'],
+                "code": rule.action or old_object['code'],
+                "message": rule.action or old_object['message'],
+                "description": rule.action or old_object['description'],
+                "parameters": rule.action or old_object['parameters'],
             }
         )
         self.db.commit()
