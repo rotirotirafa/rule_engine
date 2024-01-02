@@ -27,7 +27,7 @@ Para subir o container do Postgres `docker compose up -d`
 
 Rode as migrations no banco de dados `dotenv run alembic upgrade head`
 
-Para rodar a api: `dotenv uvicorn app.main:app --reload`
+Para rodar a api: `dotenv run uvicorn app.main:app --reload`
 
 Swagger [localhost:8000/docs/](localhost:8000/docs)
 ![doc](/docs/swagger.png)

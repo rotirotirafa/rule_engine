@@ -3,15 +3,15 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.engine import URL
 
-# from api.src.config import DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME
+from app.src.config import DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME
 
 SQLALCHEMY_DATABASE_URL = URL.create(
     "postgresql+psycopg2",
-    username='postgres',
-    password='postgres',
-    host='localhost',
-    port=5432,
-    database='rule_engine'
+    username=DB_USERNAME,
+    password=DB_PASSWORD,
+    host=DB_HOST,
+    port=DB_PORT,
+    database=DB_NAME
 )
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
