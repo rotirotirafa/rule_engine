@@ -1,5 +1,7 @@
 from typing import List
 
+from fastapi import HTTPException
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.src.core.domain.rules.model import RulesModel
@@ -23,19 +25,23 @@ class RulesRepository:
         return rules
 
     def insert(self, rule: RulesPostSchema) -> RuleSchema:
-        create_object = RulesModel(
-            name=rule.name,
-            condition=rule.condition,
-            action=rule.action,
-            code=rule.code,
-            parameters=rule.parameters,
-            message=rule.message,
-            description=rule.description
-        )
-        self.db.add(create_object)
-        self.db.commit()
-        self.db.refresh(create_object)
-        return create_object
+        try:
+            create_object = RulesModel(
+                name=rule.name,
+                condition=rule.condition,
+                action=rule.action,
+                code=rule.code,
+                parameters=rule.parameters,
+                message=rule.message,
+                description=rule.description
+            )
+            self.db.add(create_object)
+            self.db.commit()
+            self.db.refresh(create_object)
+            return create_object
+        except IntegrityError:
+            raise HTTPException(status_code=400, detail=f"Já existe uma regra com o nome {rule.name}")
+
 
     def update(self, rule_id: int, rule: RuleUpdateSchemaRequest) -> RuleSchema:
         old_object = self.db.query(RulesModel).filter_by(rule_id=rule_id)

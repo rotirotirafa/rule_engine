@@ -1,4 +1,3 @@
-import dotenv
 from fastapi import FastAPI
 from app.src.routes import api_router
 
