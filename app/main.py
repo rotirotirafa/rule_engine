@@ -7,4 +7,4 @@ app.include_router(api_router)
 
 @app.get('/')
 def health_check():
-    return 'ok'
+    return {'message': 'ok'}

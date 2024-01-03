@@ -42,7 +42,6 @@ class RulesRepository:
         except IntegrityError:
             raise HTTPException(status_code=400, detail=f"Já existe uma regra com o nome {rule.name}")
 
-
     def update(self, rule_id: int, rule: RuleUpdateSchemaRequest) -> RuleSchema:
         old_object = self.db.query(RulesModel).filter_by(rule_id=rule_id)
         old_object.update(
